@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html id="doc" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0;">	
+<title>Off Canvas</title>
+<script type="text/javascript">
+	var doc = document.getElementById('doc');
+	doc.removeAttribute('class', 'no-js');
+	doc.setAttribute('class', 'js');
+</script>
+<link href="/lab/offcanvas/css/style.css?5" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+</head>
+  <body id="page">		
+	<div class="container">	
+		<header id="header">	
+			<h1 class="page-title"><a href="http://jasonweaver.name/lab/offcanvas">Off Canvas</a></h1>
+		</header>
+		<nav class="off-canvas-navigation">
+			<ul>
+				<li class="menu-item"><a class='menu-button' href="#menu">Menu</a></li>			
+				<li class="sidebar-item"><a class='sidebar-button' href="#sidebar">Extra</a></li>
+			</ul>
+		</nav>			
+		<nav id="menu" role="navigation">
+			<ul id="nav">
+				<li class="current"><a href="/lab/offcanvas">Concept</a></li>
+				<li><a href="/lab/offcanvas/technical/">Technical</a></li>
+				<li><a href="/lab/offcanvas/variations/">Variations</a></li>			
+			</ul>											
+		</nav>		
+		<section role="main">
+			<h1>A Multi-Device Web Layout Pattern</h1>
+			<p>Inspired by the <a href="http://www.lukew.com/ff/entry.asp?1514">observations</a> of <a href="http://www.lukew.com">Luke Wroblewski</a>, this Off Canvas layout demo has 3 panels that display differently depending on the viewport width. The idea here is to have the two supporting panels of navigation and sidebar content hidden just off-screen to the left and right for easy access on small/medium viewports. Off Canvas is a design pattern, not a plugin or framework.</p>
+			
+			<figure>
+				<figcaption>Mobile-First styles centered by default.</figcaption>			
+				<img src="/lab/offcanvas/images/small-screen-center.png" class="illustrations small-screen-center" alt="small screen center layout" width="241" height="198" />
+			</figure>
+			
+			<figure>
+				<figcaption>Mobile-First styles for access to the left.</figcaption>
+			<img src="/lab/offcanvas/images/small-screen-left.png" class="illustrations small-screen-left" alt="small screen left layout" width="254" height="198"  />
+			</figure>
+			
+			<figure>
+				<figcaption>Mobile-First styles for access to the right.</figcaption>						
+			<img src="/lab/offcanvas/images/small-screen-right.png" class="illustrations small-screen-right" alt="small screen right layout"  width="254" height="198" />
+			</figure>			
+
+			<figure>
+				<figcaption>Medium viewport screen styles showing left and main panel by default.</figcaption>			
+				<img src="/lab/offcanvas/images/medium-screen-default.png" class="illustrations medium-screen-default" alt="medium screen default layout" width="366" height="403" />
+			</figure>
+			
+			<figure>
+				<figcaption>Medium viewport screen styles for access to the right.</figcaption>						
+			<img src="/lab/offcanvas/images/medium-screen-right.png" class="illustrations medium-screen-right" alt="small screen right layout"  width="366" height="403" />
+			</figure>
+			
+			<figure>
+				<figcaption>Large viewport screen styles showing all panels by default.</figcaption>			
+				<img src="/lab/offcanvas/images/large-screen-default.png" class="illustrations large-screen-default" alt="large screen default layout" width="403" height="315" />
+			</figure>
+						
+		</section>
+		
+		<section id="sidebar" role="complementary">
+			<aside>
+				<h1>Resources</h1>
+				<ul>
+					<li><a href="http://www.lukew.com/ff/entry.asp?1514">Multi-Device Layout Patterns</a></li>
+					<li><a href="http://bradfrostweb.com/blog/web/responsive-nav-patterns/">Responsive Navigation Patterns</a></li>
+					<li><a href="http://mobilewebbestpractices.com/">Mobile Web Best Practices</a></li>	
+					<li><a href="https://github.com/torkiljohnsen/swipe">Swipeable jQuery plugin</a></li>	
+					<li><a href="http://stephanierieger.com/a-plea-for-progressive-enhancement/">A Plea for Progressive Enhancement</a></li>											
+				</ul>							
+			</aside>
+			
+			<aside>
+				<h1>Live Examples</h1>
+				<ul>
+					<li><a href="http://lukew.com">Lukew.com</a></li>					
+					<li><a href="http://www.kaemingk.com/en/our-showroom/christmas/">Kaemingk Christmas 2012</a></li>									
+				</ul>							
+			</aside>
+			
+			<aside>
+				<h1>Credits</h1>
+				<ul>
+					<li><a href="http://drbl.in/bHzL">Device Outline Illustration by Pixle</a></li>									
+				</ul>							
+			</aside>
+		</section>
+		
+    <footer class="site-footer" role="contentinfo">
+	<ul>
+		<li>Design, code and content by <a href="http://jasonweaver.name">Jason Weaver</a></li>
+		<li><a href="mailto:indyplanets@gmail.com">Contact Me</a></li>	
+		<li><a href="#header">Back to top</a></li>					
+	</ul>	
+    </footer>		
+	</div>
+	<script>
+	
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-22138578-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>		
+</body>

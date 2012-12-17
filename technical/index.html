@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html id="doc" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0;">	
+<title>Off Canvas | Technical</title>
+<script type="text/javascript">
+	var doc = document.getElementById('doc');
+	doc.removeAttribute('class', 'no-js');
+	doc.setAttribute('class', 'js');
+</script>
+<link href="/lab/offcanvas/css/style.css?4" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lab/offcanvas/js/scripts.js"></script>
+
+</head>
+  <body>		
+	<div class="container">	
+		<header id="header">	
+			<h1 class="page-title"><a href="http://jasonweaver.name/lab/offcanvas">Off Canvas</a></h1>
+		</header>
+		<nav class="off-canvas-navigation">
+			<ul>
+				<li class="menu-item"><a class='menu-button' href="#menu">Menu</a></li>			
+				<li class="sidebar-item"><a class='sidebar-button' href="#sidebar">Extra</a></li>
+			</ul>
+		</nav>			
+		<nav id="menu" role="navigation">
+			<ul id="nav">
+				<li><a href="/lab/offcanvas">Concept</a></li>
+				<li class="current"><a href="/lab/offcanvas/technical/">Technical</a></li>
+				<li><a href="/lab/offcanvas/variations/">Variations</a></li>			
+			</ul>											
+		</nav>		
+		<section role="main">
+			<h1>Technical</h1>
+			<p>This version of the Off Canvas pattern works by using negative margins and changing class names with JavaScript. Transition effects are accomplished using <a href="http://www.w3.org/TR/css3-transitions/">css3 transitions</a>. I'll go over the basic style concepts below.</p>
+			
+			<h2>A Responsible Start</h2>
+			<p>In order to ensure users can get to all the content when JavaScript is disabled, we'll have a <code>.no-js</code> class on the <code>html</code> element and then replace that class with <code>.js</code> via <del>jQuery</del> JavaScript. Our default styles for all three panels can be declared first. I'm leaving out any vendor prefixes for brevity.</p>
+			<pre><code>
+[role="navigation"],
+[role="main"],
+[role="complementary"] {
+	transition: .2s all ease;			
+	width: 90%;
+	padding: 5%;
+}</code></pre>
+			
+			<figure>
+				<figcaption>Panels stacked when no JavaScript enabled.</figcaption>			
+				<img src="/lab/offcanvas/images/no-js-default.png" class="illustrations small-screen-stacked" alt="no js stacked panels" width="114" height="198" />
+			</figure>
+			
+			<p>If JavaScript is detected, declare our layout styles for each panel with the navigation to the left and the sidebar content to the right.</p>
+				
+				<pre>
+					<code>
+.js [role="navigation"] {	
+	margin-left: -100%;
+	float: left;
+}
+.js [role="main"] {
+	margin-left: 0;
+	float: left;
+}
+.js [role="complementary"] {	
+	margin-right: -200%;
+	float: left;		
+}</code></pre>
+			<figure>
+				<figcaption>Mobile-First styles centered by default.</figcaption>			
+				<img src="/lab/offcanvas/images/small-screen-center.png" class="illustrations small-screen-center" alt="small screen center layout" width="241" height="198" />
+			</figure>				
+				<p><strong>Note:</strong> For some reason the the <code>margin-right: -200%;</code> declaration on <code>.js [role="complementary"]</code> makes for a smoother transition in WebKit and Gecko. If anybody knows why, <a href="mailto:indyplanets@gmail.com">let me know</a>. You can basically declare anything for it though. I just wanted the transitions to look nice.				
+				</p>
+			
+			<h2>Access Left</h2>
+			<p>For this demo, I'm using the left panel as navigation. We'll need an anchor element that will default to jump down the page to the <code>#nav</code> id. To get this to open the panel, we'll use a bit of jQuery to prevent default plus add a class to the body when clicked. Let's take a look at the panel styles for when the navigation is open.</p>
+			
+<pre><code>			
+.active-nav [role="navigation"] {	
+	margin-left: 0;	
+	width: 80%;
+}
+.active-nav [role="main"]{
+	margin-right: -100%;
+}
+.active-nav [role="complementary"] {	
+	margin-right: -100%;
+	float: right;		
+}
+</code></pre>
+			<figure>
+				<figcaption>Mobile-First styles for access to the left.</figcaption>
+			<img src="/lab/offcanvas/images/small-screen-left.png" class="illustrations small-screen-left" alt="small screen left layout" width="254" height="198"  />
+			</figure>
+			
+			<h2>Access Right</h2>			
+			<p>Now we take the same concept to the other side for the hidden sidebar panel. We'll use slightly different styles.</p>
+				
+<pre><code>			
+.active-sidebar [role="navigation"] {	
+	margin-left: -100%;
+}
+.active-sidebar [role="main"] {
+	margin-left: -90%;	
+}
+.active-sidebar [role="complementary"] {	
+	margin-left: 0;
+	width: 80%;	
+}</code></pre>
+			
+			<figure>
+				<figcaption>Mobile-First styles for access to the right.</figcaption>						
+			<img src="/lab/offcanvas/images/small-screen-right.png" class="illustrations small-screen-right" alt="small screen right layout"  width="254" height="198" />
+			</figure>
+
+			<h2>Medium Viewport Styles</h2>
+			<p>For medium size viewports, we'll have the navigation panel show by default and hide the sidebar.</p>
+<pre><code>			
+@media all and (min-width: 600px) {	
+	.js [role="navigation"] {
+		width: 20%;	
+		margin-left: 0;
+	}
+	.js [role="main"] {
+		width: 60%;
+		float: left;
+	}
+	.js [role="complementary"] {
+		width: 20%;
+	}				
+	.active-sidebar [role="navigation"] {	
+		margin-left: -100%;
+	}
+	.active-sidebar [role="main"] {
+		margin-left: 0;
+		width: 60%;
+	}
+	.active-sidebar [role="complementary"] {	
+		margin-right: -80%;
+		width: 20%;
+	}				
+}</code></pre>			
+			
+			<figure>
+				<figcaption>Medium viewport screen styles showing left and main panel by default.</figcaption>			
+				<img src="/lab/offcanvas/images/medium-screen-default.png" class="illustrations medium-screen-default" alt="medium screen default layout" width="366" height="403" />
+			</figure>
+			
+			<figure>
+				<figcaption>Medium viewport screen styles for access to the right.</figcaption>						
+			<img src="/lab/offcanvas/images/medium-screen-right.png" class="illustrations medium-screen-right" alt="small screen right layout"  width="366" height="403" />
+			</figure>
+
+
+
+			<h2>Large Viewport Styles</h2>
+			<p>For large size viewports, we'll show all panels.</p>
+<pre><code>				
+@media all and (min-width: 800px) {	
+	.js [role="navigation"] {
+		width: 19%;	
+		margin-left: 0;
+		float: left;
+		padding: 3%
+	}
+
+	.js [role="main"] {
+		width: 44%;
+		padding: 3%;		
+	}
+
+	.js [role="complementary"] {
+		width: 19%;	
+		padding: 3%;	
+		margin-right: 0;
+		float: right;
+	}				
+}</code></pre>	
+			<figure>
+			<figcaption>Large viewport screen styles showing all panels by default.</figcaption>			
+				<img src="/lab/offcanvas/images/large-screen-default.png" class="illustrations large-screen-default" alt="large screen default layout" width="403" height="315" />
+			</figure>
+
+
+		</section>
+		
+		<section id="sidebar" role="complementary">
+			<aside>
+				<h1>Resources</h1>
+				<ul>
+					<li><a href="http://www.lukew.com/ff/entry.asp?1514">Multi-Device Layout Patterns</a></li>
+					<li><a href="http://bradfrostweb.com/blog/web/responsive-nav-patterns/">Responsive Navigation Patterns</a></li>
+					<li><a href="http://mobilewebbestpractices.com/">Mobile Web Best Practices</a></li>
+					<li><a href="https://github.com/torkiljohnsen/swipe">Swipeable jQuery plugin</a></li>	
+					<li><a href="http://stephanierieger.com/a-plea-for-progressive-enhancement/">A Plea for Progressive Enhancement</a></li>																		
+				</ul>							
+			</aside>
+			
+			<aside>
+				<h1>Live Examples</h1>
+				<ul>
+					<li><a href="http://lukew.com">Lukew.com</a></li>						
+					<li><a href="http://www.kaemingk.com/en/our-showroom/christmas/">Kaemingk Christmas 2012</a></li>									
+				</ul>							
+			</aside>			
+			<aside>
+				<h1>Credits</h1>
+				<ul>
+					<li><a href="http://drbl.in/bHzL">Device Outline Illustration by Pixle</a></li>										
+				</ul>							
+			</aside>			
+		</section>
+		
+    <footer class="site-footer" role="contentinfo">
+	<ul>
+		<li>Design, code and content by <a href="http://jasonweaver.name">Jason Weaver</a></li>
+		<li><a href="mailto:indyplanets@gmail.com">Contact Me</a></li>
+		<li><a href="#header">Back to top</a></li>						
+	</ul>	
+    </footer>		
+	</div>
+	<script>
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-22138578-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>		
+</body>
